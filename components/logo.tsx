@@ -1,41 +1,37 @@
 import { cn } from "@/lib/utils";
+import { ConceptGleam } from "@/components/logo-concepts";
 
 /**
- * Concept A (current): the "U" drawn as an open arc — a wipe stroke — with a
- * shine spark breaking off the top right. Tile gradient runs navy → cyan.
- * Two alternate concepts live in components/logo-concepts.tsx for client review.
+ * The live mark: Concept A, "The Gleam" — see components/logo-concepts.tsx for
+ * the other two directions and the argument against each.
+ *
+ * Runs in `adaptive` tone rather than the fixed aqua of the reviewed artwork.
+ * The lockup has to sit on the light header, on the dark footer, and on the
+ * hero photography while the header floats, and aqua measures 2.2:1 against the
+ * mist canvas — soft enough to look washed out at 44px. Adaptive draws the
+ * large sparkle in `currentColor` so it inherits whatever is legible, and keeps
+ * the lime accent constant. Pass `tone="brand"` for the fixed-aqua version.
+ *
+ * Swapping direction is a one-line change here. The concepts themselves live in
+ * logo-concepts.tsx so the /brand review page and the site never drift apart.
+ *
+ * Sized at 44px in the nav rather than the usual ~28px utility size: the client
+ * asked specifically for a larger, more prominent name and mark, and a logo
+ * scaled like a favicon is what made the last build feel anonymous.
  */
 export function LogoMark({
   className,
-  ...props
-}: React.ComponentProps<"svg">) {
+  mono,
+}: {
+  className?: string;
+  mono?: boolean;
+}) {
   return (
-    <svg
-      viewBox="0 0 48 48"
-      role="img"
-      aria-label="Ushine 24/7"
-      className={cn("size-9", className)}
-      {...props}
-    >
-      <defs>
-        <linearGradient id="ushine-mark" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--primary)" />
-          <stop offset="100%" stopColor="var(--brand)" />
-        </linearGradient>
-      </defs>
-      <rect width="48" height="48" rx="13" fill="url(#ushine-mark)" />
-      <path
-        d="M15 14v11.5a9 9 0 0 0 18 0V14"
-        fill="none"
-        stroke="white"
-        strokeWidth="4.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M33.5 10.5c.4 2.6 1.4 3.6 4 4-2.6.4-3.6 1.4-4 4-.4-2.6-1.4-3.6-4-4 2.6-.4 3.6-1.4 4-4Z"
-        fill="white"
-      />
-    </svg>
+    <ConceptGleam
+      className={cn("size-11", className)}
+      mono={mono}
+      tone="adaptive"
+    />
   );
 }
 
@@ -47,14 +43,16 @@ export function Logo({
   showBadge?: boolean;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
+    <span className={cn("inline-flex items-center gap-3", className)}>
       <LogoMark />
-      <span className="flex items-baseline gap-1.5">
-        <span className="text-xl font-semibold tracking-tight">Ushine</span>
-        {/* The badge uses currentColor: the lockup sits on both the light
-            header and the dark footer, so it inherits whatever is legible. */}
+      <span className="flex items-baseline gap-2">
+        <span className="font-heading text-2xl font-extrabold tracking-tight">
+          Ushine
+        </span>
+        {/* The badge uses currentColor for its border so the lockup works on the
+            light header and the dark footer without a second variant. */}
         {showBadge ? (
-          <span className="rounded-md border border-current/35 px-1.5 py-0.5 text-[0.65rem] leading-none font-bold tracking-wide opacity-80">
+          <span className="rounded-md border border-current/35 px-1.5 py-1 text-[0.7rem] leading-none font-extrabold tracking-wide">
             24/7
           </span>
         ) : null}
