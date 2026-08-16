@@ -1,18 +1,26 @@
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/container";
+import { Reveal } from "@/components/reveal";
 
 type SectionProps = React.ComponentProps<"section"> & {
   /** Background treatment for the band. */
-  tone?: "default" | "muted" | "ink";
+  tone?: "default" | "paper" | "teal" | "ink";
   containerClassName?: string;
 };
 
 const tones = {
-  default: "bg-background",
-  muted: "bg-muted/50",
+  default: "bg-mist",
+  paper: "bg-white",
+  teal: "bg-teal-glow text-mist",
   ink: "bg-ink text-ink-foreground",
 } as const;
 
+/**
+ * Standard band. The vertical rhythm comes from the `--spacing-section` tokens
+ * (96px mobile / 160px desktop) rather than per-section guesses — cramped
+ * spacing is the single loudest "business template" signal, and the previous
+ * build ran at 48px.
+ */
 export function Section({
   className,
   containerClassName,
@@ -22,7 +30,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section
-      className={cn("py-12 sm:py-16 lg:py-24", tones[tone], className)}
+      className={cn("py-section lg:py-section-lg", tones[tone], className)}
       {...props}
     >
       <Container className={containerClassName}>{children}</Container>
@@ -30,38 +38,75 @@ export function Section({
   );
 }
 
+/**
+ * Section heading. Left-aligned by default: centred headline over centred
+ * sub-line over a row of cards is the exact pattern the client rejected, and
+ * the alignment is half of what makes it read that way.
+ */
 export function SectionHeading({
   eyebrow,
   title,
   description,
-  align = "center",
+  align = "left",
+  tone = "light",
   className,
+  children,
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
   align?: "center" | "left";
+  /** `dark` inverts the colours for use on the teal and ink bands. */
+  tone?: "light" | "dark";
   className?: string;
+  children?: React.ReactNode;
 }) {
   return (
-    <div
+    <Reveal
       className={cn(
-        "flex flex-col gap-3",
-        align === "center" && "mx-auto max-w-2xl text-center",
+        "flex flex-col items-start gap-4",
+        align === "center" && "mx-auto max-w-3xl items-center text-center",
         className,
       )}
     >
       {eyebrow ? (
-        <span className="text-brand-strong text-sm font-semibold tracking-[0.14em] uppercase">
+        <span
+          className={cn(
+            "inline-flex items-center gap-2.5 text-xs font-bold tracking-[0.18em] uppercase",
+            tone === "dark" ? "text-lime" : "text-aqua-ink",
+          )}
+        >
+          <span
+            className={cn(
+              "h-px w-8",
+              tone === "dark" ? "bg-lime" : "bg-aqua-ink",
+            )}
+          />
           {eyebrow}
         </span>
       ) : null}
-      <h2 className="text-2xl font-semibold sm:text-3xl lg:text-4xl">{title}</h2>
+
+      <h2
+        className={cn(
+          "text-display-sm font-extrabold",
+          tone === "dark" ? "text-mist" : "text-foreground",
+        )}
+      >
+        {title}
+      </h2>
+
       {description ? (
-        <p className="text-muted-foreground text-[0.95rem] leading-relaxed sm:text-lg">
+        <p
+          className={cn(
+            "max-w-2xl text-base leading-relaxed sm:text-lg",
+            tone === "dark" ? "text-mist/75" : "text-muted-foreground",
+          )}
+        >
           {description}
         </p>
       ) : null}
-    </div>
+
+      {children}
+    </Reveal>
   );
 }

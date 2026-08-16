@@ -19,7 +19,7 @@ import { Logo } from "@/components/logo";
 import { mainNav, site } from "@/data/site";
 import { services } from "@/data/services";
 
-export function MobileNav() {
+export function MobileNav({ floating = false }: { floating?: boolean }) {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
 
@@ -44,7 +44,7 @@ export function MobileNav() {
     <Sheet key={pathname} open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
-          variant="outline"
+          variant={floating ? "outline-inverse" : "outline"}
           size="icon-lg"
           className="lg:hidden"
           aria-label="Open menu"
@@ -93,7 +93,7 @@ export function MobileNav() {
         </nav>
 
         <div className="mt-auto flex flex-col gap-3 border-t p-4">
-          <Button asChild size="xl" variant="brand">
+          <Button asChild size="xl" variant="lime">
             <Link href="/quote" onClick={close}>
               Get a free quote
             </Link>

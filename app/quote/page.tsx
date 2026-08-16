@@ -27,6 +27,7 @@ export default function QuotePage() {
   return (
     <>
       <PageHero
+        image="quote"
         eyebrow="Free quote"
         title="Get a fixed price for your clean"
         description="Two minutes to fill in, no obligation. We will come back to you with a price for the job — not a vague hourly rate."
@@ -50,7 +51,7 @@ export default function QuotePage() {
                 Call us. A person answers, at any hour — including nights,
                 weekends and public holidays.
               </p>
-              <Button asChild size="xl" variant="brand" className="mt-5 w-full">
+              <Button asChild size="xl" variant="lime" className="mt-5 w-full">
                 <a href={site.phoneHref}>
                   <Phone /> {site.phone}
                 </a>

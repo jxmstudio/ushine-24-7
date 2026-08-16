@@ -19,13 +19,17 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
-        // Ushine additions
+        // Ushine additions.
+        // Lime is the primary conversion colour — it is the loudest thing in
+        // the palette and is reserved for "get a quote" and "call now" so it
+        // never has to compete with itself.
+        lime: "bg-lime text-ink font-semibold shadow-sm hover:bg-[color-mix(in_oklch,var(--lime),white_18%)]",
         brand:
           "bg-brand text-brand-foreground shadow-sm hover:bg-[color-mix(in_oklch,var(--brand),white_12%)]",
         inverse:
           "bg-background text-foreground hover:bg-[color-mix(in_oklch,var(--background),var(--foreground)_8%)]",
         "outline-inverse":
-          "border-white/30 text-white hover:bg-white/10 hover:text-white",
+          "border-white/40 text-white hover:bg-white/12 hover:text-white",
       },
       size: {
         default:

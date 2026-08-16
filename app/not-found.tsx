@@ -8,7 +8,7 @@ import { site } from "@/data/site";
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-6 py-24 text-center">
-      <p className="text-brand-strong text-sm font-semibold tracking-[0.14em] uppercase">
+      <p className="text-aqua-ink text-sm font-bold tracking-[0.18em] uppercase">
         404
       </p>
       <h1 className="text-3xl font-semibold sm:text-4xl">
@@ -19,7 +19,7 @@ export default function NotFound() {
         us — we answer 24/7.
       </p>
       <div className="flex flex-col gap-3 sm:flex-row">
-        <Button asChild size="xl" variant="brand">
+        <Button asChild size="xl" variant="lime">
           <Link href="/services">See our services</Link>
         </Button>
         <Button asChild size="xl" variant="outline">

@@ -19,6 +19,7 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHero
+        image="about"
         title="Privacy Policy"
         description={`How ${site.legalName} handles the information you give us.`}
         breadcrumbs={[

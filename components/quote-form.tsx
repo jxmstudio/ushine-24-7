@@ -227,7 +227,7 @@ export function QuoteForm() {
         </div>
 
         <div className="flex flex-col gap-3">
-          <Button type="submit" size="xl" variant="brand" disabled={pending}>
+          <Button type="submit" size="xl" variant="lime" disabled={pending}>
             {pending ? (
               <>
                 <Loader2 className="animate-spin" /> Sending…

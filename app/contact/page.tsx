@@ -53,6 +53,7 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        image="contact"
         eyebrow="Contact"
         title="Talk to us any hour of the day"
         description="There is no answering machine and no waiting until Monday. Call, email, or send the form and we will get straight back to you."
@@ -80,7 +81,7 @@ export default function ContactPage() {
         </div>
       </Section>
 
-      <Section tone="muted" className="pt-0">
+      <Section tone="paper" className="pt-0">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
           <div className="bg-card rounded-2xl border p-5 shadow-sm sm:p-9">
             <h2 className="text-2xl font-semibold">Send an enquiry</h2>

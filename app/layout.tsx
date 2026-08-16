@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { StickyCallBar } from "@/components/sticky-call-bar";
 import { JsonLd } from "@/components/json-ld";
 import { Toaster } from "@/components/ui/sonner";
 import { localBusinessSchema } from "@/lib/schema";
 import { site } from "@/data/site";
 
-// Display face for headings — has some character, so the site does not read as
-// a default template. Body face is warmer and rounder than a stock grotesque.
+// Bricolage is expressive and contemporary, and deliberately nothing like the
+// editorial serif on the Yireh site — the two brands ship together and must not
+// read as one template. Inter carries the body, neutral and fast.
 const heading = Bricolage_Grotesque({
   variable: "--font-heading-family",
   subsets: ["latin"],
   display: "swap",
 });
 
-const body = Plus_Jakarta_Sans({
+const body = Inter({
   variable: "--font-body-family",
   subsets: ["latin"],
   display: "swap",
@@ -61,7 +63,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en-AU"
       className={`${body.variable} ${heading.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      {/* Bottom padding on small screens clears the sticky call bar, which would
+          otherwise sit over the last rows of the footer. */}
+      <body className="flex min-h-full flex-col max-lg:pb-[4.75rem]">
         <a
           href="#main"
           className="focus:bg-background sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:border focus:px-4 focus:py-2"
@@ -73,6 +77,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <StickyCallBar />
         <Toaster position="top-center" richColors />
         <JsonLd data={localBusinessSchema()} />
       </body>

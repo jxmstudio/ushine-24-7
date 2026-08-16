@@ -3,13 +3,17 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/hero";
 import {
   AreasSection,
+  AvailabilityBar,
+  BeforeAfterSection,
   ContractBand,
   CtaBand,
+  EnquirySection,
   FaqSection,
   ServicesSection,
   StepsSection,
-  WhyUsSection,
+  TrustSection,
 } from "@/components/home-sections";
+import { TwentyFourSevenDivider } from "@/components/twenty-four-seven";
 import { JsonLd } from "@/components/json-ld";
 import { generalFaqs } from "@/data/faqs";
 import { faqSchema } from "@/lib/schema";
@@ -21,19 +25,29 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+/**
+ * Homepage section order follows the "Always On" brief: prove availability
+ * immediately, show the work, then ask. The 24/7 divider recurs between the
+ * major movements so the one thing that differentiates this business from every
+ * other Sydney cleaner is never more than a screen away.
+ */
 export default function HomePage() {
   return (
     <>
       <Hero />
+      <AvailabilityBar />
       <ServicesSection />
       <ContractBand />
+      <BeforeAfterSection />
+      <TwentyFourSevenDivider />
       <StepsSection />
-      <WhyUsSection />
+      <TrustSection />
       <AreasSection />
       <FaqSection
         faqs={generalFaqs}
         description="If yours is not here, call us — we would rather answer it now than have you guess."
       />
+      <EnquirySection />
       <CtaBand />
       <JsonLd data={faqSchema(generalFaqs)} />
     </>

@@ -6,7 +6,7 @@ import { ArrowRight, Clock, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeading } from "@/components/section";
-import { ServiceCard } from "@/components/service-card";
+import { ServiceTile } from "@/components/service-tile";
 import { CtaBand, FaqSection } from "@/components/home-sections";
 import { JsonLd } from "@/components/json-ld";
 import { getSuburb, suburbs } from "@/data/suburbs";
@@ -57,13 +57,14 @@ export default async function SuburbPage({
   return (
     <>
       <PageHero
+        image="areas"
         eyebrow={suburb.region}
         title={`Cleaners in ${suburb.name}`}
         description={suburb.blurb}
         breadcrumbs={breadcrumbs}
       >
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="xl" variant="brand">
+          <Button asChild size="xl" variant="lime">
             <Link href={`/quote?suburb=${encodeURIComponent(suburb.name)}`}>
               Get a free quote <ArrowRight />
             </Link>
@@ -118,7 +119,7 @@ export default async function SuburbPage({
                 to you with a price.
               </p>
               <div className="mt-6 flex flex-col gap-3">
-                <Button asChild size="xl" variant="brand">
+                <Button asChild size="xl" variant="lime">
                   <a href={site.phoneHref}>
                     <Phone /> {site.phone}
                   </a>
@@ -139,14 +140,14 @@ export default async function SuburbPage({
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section tone="paper">
         <SectionHeading
           eyebrow={`In ${suburb.name}`}
           title="What we can clean for you"
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
+          {services.map((service, i) => (
+            <ServiceTile key={service.slug} service={service} index={i} />
           ))}
         </div>
       </Section>

@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/accordion";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeading } from "@/components/section";
-import { ServiceCard } from "@/components/service-card";
+import { ServiceTile } from "@/components/service-tile";
 import { CtaBand } from "@/components/home-sections";
 import { JsonLd } from "@/components/json-ld";
 import { serviceImages } from "@/data/images";
@@ -62,13 +62,14 @@ export default async function ServicePage({
   return (
     <>
       <PageHero
+        image={photo}
         eyebrow={service.tagline}
         title={`${service.title} in Sydney`}
         description={service.summary}
         breadcrumbs={breadcrumbs}
       >
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="xl" variant="brand">
+          <Button asChild size="xl" variant="lime">
             <Link href="/quote">
               Get a free quote <ArrowRight />
             </Link>
@@ -168,7 +169,7 @@ export default async function ServicePage({
                 fixed price with no obligation — and we answer the phone 24/7.
               </p>
               <div className="mt-6 flex flex-col gap-3">
-                <Button asChild size="xl" variant="brand">
+                <Button asChild size="xl" variant="lime">
                   <Link href={`/quote?service=${service.slug}`}>
                     Request a quote <ArrowRight />
                   </Link>
@@ -200,15 +201,15 @@ export default async function ServicePage({
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section tone="paper">
         <SectionHeading
           eyebrow="Also available"
           title="Other things we clean"
           description="Most clients start with one service and add another once they know how we work."
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {related.map((item) => (
-            <ServiceCard key={item.slug} service={item} />
+          {related.map((item, i) => (
+            <ServiceTile key={item.slug} service={item} index={i} />
           ))}
         </div>
       </Section>

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function ThankYouPage() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center gap-6 py-24 text-center">
-      <span className="bg-brand-soft text-primary flex size-16 items-center justify-center rounded-full">
+      <span className="bg-lime text-ink flex size-16 items-center justify-center rounded-full">
         <CheckCircle2 className="size-8" />
       </span>
       <h1 className="text-3xl font-semibold sm:text-4xl">
@@ -30,7 +30,7 @@ export default function ThankYouPage() {
         In a hurry? Call us now — we answer 24 hours a day.
       </p>
       <div className="flex flex-col gap-3 sm:flex-row">
-        <Button asChild size="xl" variant="brand">
+        <Button asChild size="xl" variant="lime">
           <a href={site.phoneHref}>
             <Phone /> {site.phone}
           </a>

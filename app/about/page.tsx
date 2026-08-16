@@ -49,6 +49,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image="about"
         eyebrow="About us"
         title="A cleaning business that answers the phone"
         description={`Ushine 24/7 is a ${site.baseRegion} cleaning company serving households and businesses across Sydney — at whatever hour the job actually needs doing.`}
@@ -59,8 +60,8 @@ export default function AboutPage() {
         <div className="mx-auto flex max-w-3xl flex-col gap-6">
           <div className="relative aspect-16/9 overflow-hidden rounded-2xl border">
             <Image
-              src={images.about.src}
-              alt={images.about.alt}
+              src={images.trust.src}
+              alt={images.trust.alt}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 768px"
@@ -95,7 +96,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section tone="muted">
+      <Section tone="paper">
         <SectionHeading
           eyebrow="How we work"
           title="Four things we hold ourselves to"

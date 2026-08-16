@@ -27,13 +27,14 @@ export default function AreasPage() {
   return (
     <>
       <PageHero
+        image="areas"
         eyebrow="Service area"
         title="Cleaners across Sydney"
         description={`We are based in ${site.baseSuburb}, ${site.baseRegion}, and travel across the Sydney metropolitan area. Western Sydney is our home ground — but we work everywhere from the Blue Mountains side to the eastern beaches.`}
         breadcrumbs={breadcrumbs}
       >
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="xl" variant="brand">
+          <Button asChild size="xl" variant="lime">
             <Link href="/quote">
               Check my suburb <ArrowRight />
             </Link>

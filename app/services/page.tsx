@@ -5,7 +5,7 @@ import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeading } from "@/components/section";
-import { ServiceCard } from "@/components/service-card";
+import { ServiceTile } from "@/components/service-tile";
 import { CtaBand, FaqSection } from "@/components/home-sections";
 import { JsonLd } from "@/components/json-ld";
 import { services } from "@/data/services";
@@ -24,6 +24,7 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
+        image="services"
         eyebrow="Services"
         title="Cleaning services across Sydney"
         description="Five things we do properly, at any hour of the day. Every job is quoted as a fixed price before we start."
@@ -33,7 +34,7 @@ export default function ServicesPage() {
         ]}
       >
         <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <Button asChild size="xl" variant="brand">
+          <Button asChild size="xl" variant="lime">
             <Link href="/quote">
               Get a free quote <ArrowRight />
             </Link>
@@ -53,8 +54,8 @@ export default function ServicesPage() {
           description="Not sure which one fits? Call us and describe the place — we will tell you what it needs and what it costs."
         />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard key={service.slug} service={service} />
+          {services.map((service, i) => (
+            <ServiceTile key={service.slug} service={service} index={i} />
           ))}
         </div>
       </Section>

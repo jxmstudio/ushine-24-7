@@ -19,6 +19,7 @@ export default function TermsPage() {
   return (
     <>
       <PageHero
+        image="about"
         title="Terms of Service"
         description={`The terms that apply when you book cleaning work with ${site.legalName}.`}
         breadcrumbs={[
