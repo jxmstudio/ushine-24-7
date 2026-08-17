@@ -129,7 +129,7 @@ export function SiteFooter() {
       {/* Oversized wordmark. Decorative — the accessible name is in the lockup
           at the top of the footer, so this is hidden from assistive tech. */}
       <div aria-hidden className="select-none">
-        <p className="font-heading text-ink-foreground/10 -mb-[0.18em] px-4 text-center text-[clamp(4rem,17vw,15rem)] leading-none font-extrabold tracking-tighter whitespace-nowrap">
+        <p className="font-heading text-ink-foreground/10 -mb-[0.18em] px-4 text-center text-[clamp(4rem,17vw,15rem)] leading-none font-semibold tracking-tight whitespace-nowrap">
           Ushine <span className="text-lime/20">24/7</span>
         </p>
       </div>

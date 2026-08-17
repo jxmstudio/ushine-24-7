@@ -18,7 +18,7 @@ import { ServiceTile } from "@/components/service-tile";
 import { BeforeAfter } from "@/components/before-after";
 import { Reveal } from "@/components/reveal";
 import { TwentyFourSevenMark } from "@/components/twenty-four-seven";
-import { comparisons, images, stepImages } from "@/data/images";
+import { blurProps, comparisons, images, stepImages } from "@/data/images";
 import { services } from "@/data/services";
 import { suburbs } from "@/data/suburbs";
 import { site } from "@/data/site";
@@ -46,7 +46,7 @@ export function AvailabilityBar() {
             key={fact.value}
             className="flex flex-col gap-1 py-7 sm:items-center sm:py-9 sm:text-center"
           >
-            <span className="font-heading text-lime text-2xl font-extrabold tracking-tight sm:text-3xl">
+            <span className="font-heading text-lime text-2xl font-semibold tracking-tight sm:text-3xl">
               {fact.value}
             </span>
             <span className="text-mist/70 text-sm">{fact.label}</span>
@@ -71,8 +71,9 @@ export function ServicesSection() {
       />
 
       {/* Residential leads and takes the largest tile: it is the service the
-          client wants pushed hardest, so it gets the most pixels. */}
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[19rem]">
+          client wants pushed hardest, so it gets the most pixels. Hairline
+          gutters — the tiles read as one photographic surface, not cards. */}
+      <div className="mt-12 grid gap-0.5 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[20rem]">
         <Reveal className="sm:col-span-2 lg:row-span-2 lg:h-full">
           <ServiceTile
             service={lead}
@@ -123,10 +124,11 @@ export function ContractBand() {
 
       <Container className="py-section lg:py-section-lg relative">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal className="relative aspect-4/5 overflow-hidden rounded-3xl sm:aspect-3/2 lg:aspect-4/5">
+          <Reveal className="bg-ink relative aspect-4/5 overflow-hidden sm:aspect-3/2 lg:aspect-4/5">
             <Image
               src={images.contract.src}
               alt={images.contract.alt}
+              {...blurProps(images.contract)}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -244,19 +246,20 @@ export function StepsSection() {
       <ol className="mt-12 grid gap-8 md:grid-cols-3">
         {steps.map((step, index) => (
           <Reveal as="li" key={step.title} delay={index * 90}>
-            <div className="relative aspect-3/2 overflow-hidden rounded-2xl">
+            <div className="bg-ink relative aspect-3/2 overflow-hidden">
               <Image
                 src={stepImages[index].src}
                 alt={stepImages[index].alt}
+                {...blurProps(stepImages[index])}
                 fill
                 sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover"
               />
-              <span className="font-heading bg-lime text-ink absolute top-4 left-4 flex size-11 items-center justify-center rounded-full text-base font-extrabold">
+              <span className="font-heading bg-lime text-ink absolute top-4 left-4 flex size-11 items-center justify-center rounded-full text-base font-semibold">
                 {String(index + 1).padStart(2, "0")}
               </span>
             </div>
-            <h3 className="mt-5 text-2xl font-extrabold tracking-tight">
+            <h3 className="mt-5 text-2xl font-semibold tracking-tight">
               {step.title}
             </h3>
             <p className="text-muted-foreground mt-2 leading-relaxed">
@@ -302,10 +305,11 @@ export function TrustSection() {
   return (
     <Section tone="paper">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <Reveal className="relative aspect-4/5 overflow-hidden rounded-3xl lg:sticky lg:top-28 lg:self-start">
+        <Reveal className="bg-ink relative aspect-4/5 overflow-hidden lg:sticky lg:top-28 lg:self-start">
           <Image
             src={images.trust.src}
             alt={images.trust.alt}
+            {...blurProps(images.trust)}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
@@ -326,7 +330,7 @@ export function TrustSection() {
                 className="border-border border-t py-7 first:border-t-0 first:pt-0"
                 delay={index * 70}
               >
-                <dt className="text-xl font-extrabold tracking-tight">
+                <dt className="font-heading text-xl font-semibold tracking-tight">
                   {claim.title}
                 </dt>
                 <dd className="text-muted-foreground mt-2 leading-relaxed">
@@ -349,6 +353,7 @@ export function AreasSection() {
       <Image
         src={images.areas.src}
         alt={images.areas.alt}
+        {...blurProps(images.areas)}
         fill
         sizes="100vw"
         className="-z-20 object-cover"
@@ -458,7 +463,7 @@ export function EnquirySection() {
           delay={140}
         >
           <div>
-            <h3 className="text-2xl font-extrabold tracking-tight">
+            <h3 className="text-2xl font-semibold tracking-tight">
               Would rather just talk to someone?
             </h3>
             <p className="text-mist/75 mt-3 leading-relaxed">
@@ -524,6 +529,7 @@ export function CtaBand({
       <Image
         src={images.cta.src}
         alt={images.cta.alt}
+        {...blurProps(images.cta)}
         fill
         sizes="100vw"
         className="-z-20 object-cover"
@@ -535,7 +541,7 @@ export function CtaBand({
 
       <Container className="py-section lg:py-section-lg relative">
         <Reveal className="flex max-w-3xl flex-col items-start gap-7">
-          <h2 className="text-mist text-display-sm font-extrabold">{title}</h2>
+          <h2 className="text-mist text-display-sm font-semibold">{title}</h2>
           <p className="text-mist/80 max-w-xl text-lg leading-relaxed">{body}</p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild size="xl" variant="lime">

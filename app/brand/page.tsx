@@ -92,7 +92,7 @@ export default function BrandPage() {
                   <span className="text-aqua-ink text-xs font-bold tracking-[0.18em] uppercase">
                     Concept {concept.id}
                   </span>
-                  <h3 className="text-2xl font-extrabold tracking-tight">
+                  <h3 className="text-2xl font-semibold tracking-tight">
                     {concept.name}
                   </h3>
                 </div>
@@ -115,13 +115,13 @@ export default function BrandPage() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="bg-mist border-border flex items-center justify-center gap-4 rounded-2xl border p-10">
                     <concept.Component className="size-16" />
-                    <span className="font-heading text-xl font-extrabold tracking-tight">
+                    <span className="font-heading text-xl font-semibold tracking-tight">
                       Ushine
                     </span>
                   </div>
                   <div className="bg-ink flex items-center justify-center gap-4 rounded-2xl p-10">
                     <concept.Component className="size-16" />
-                    <span className="text-ink-foreground font-heading text-xl font-extrabold tracking-tight">
+                    <span className="text-ink-foreground font-heading text-xl font-semibold tracking-tight">
                       Ushine
                     </span>
                   </div>

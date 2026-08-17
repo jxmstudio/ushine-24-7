@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 import { Container } from "@/components/container";
-import { pageImages, type SiteImage } from "@/data/images";
+import { blurProps, pageImages, type SiteImage } from "@/data/images";
 
 /**
  * Inner-page hero.
@@ -12,6 +12,10 @@ import { pageImages, type SiteImage } from "@/data/images";
  * "office-type" pattern this rebuild exists to get away from, and it is just as
  * wrong at page level as it is on the homepage — so the image is not optional
  * here, only which image.
+ *
+ * Two scrims, not one: a vertical wash to anchor the bottom edge where the
+ * type sits, and a horizontal one to keep the text column legible over a
+ * bright frame. Both in deep teal — a black wash makes any interior look grey.
  */
 export function PageHero({
   eyebrow,
@@ -35,10 +39,11 @@ export function PageHero({
       : (image ?? pageImages.services);
 
   return (
-    <section className="relative isolate flex min-h-[58svh] items-end overflow-hidden">
+    <section className="bg-deep-teal relative isolate flex min-h-[62svh] items-end overflow-hidden">
       <Image
         src={photo.src}
         alt={photo.alt}
+        {...blurProps(photo)}
         fill
         priority
         sizes="100vw"
@@ -46,7 +51,13 @@ export function PageHero({
       />
       <div
         aria-hidden
-        className="from-deep-teal via-deep-teal/65 absolute inset-0 -z-10 bg-gradient-to-tr to-transparent"
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage: [
+            "linear-gradient(to top, rgba(6,55,60,0.88), rgba(6,55,60,0.34) 52%, rgba(6,55,60,0.12))",
+            "linear-gradient(to right, rgba(6,55,60,0.82), rgba(6,55,60,0.42) 42%, rgba(6,55,60,0) 72%)",
+          ].join(", "),
+        }}
       />
 
       <Container className="w-full pt-16 pb-14 sm:pb-20">
@@ -79,13 +90,15 @@ export function PageHero({
         <div className="flex max-w-3xl flex-col gap-5">
           {eyebrow ? (
             <span className="text-lime inline-flex items-center gap-2.5 text-xs font-bold tracking-[0.18em] uppercase">
-              <span className="bg-lime h-px w-8" />
+              <span aria-hidden className="bg-lime h-px w-8 opacity-80" />
               {eyebrow}
             </span>
           ) : null}
-          <h1 className="text-mist text-display-sm font-extrabold">{title}</h1>
+          <h1 className="text-mist text-display-sm font-semibold">{title}</h1>
           {description ? (
-            <p className="text-mist/80 text-lg leading-relaxed">{description}</p>
+            <p className="text-mist/80 max-w-[52ch] text-lg leading-relaxed">
+              {description}
+            </p>
           ) : null}
           {children}
         </div>

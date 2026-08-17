@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
-import type { SiteImage } from "@/data/images";
+import { blurProps, type SiteImage } from "@/data/images";
 
 /**
  * Before / after comparison slider.
@@ -33,12 +33,13 @@ export function BeforeAfter({
 
   return (
     <figure className={cn("flex flex-col gap-4", className)}>
-      <div className="group relative aspect-4/3 w-full overflow-hidden rounded-2xl sm:aspect-3/2">
+      <div className="group bg-ink relative aspect-4/3 w-full overflow-hidden sm:aspect-3/2">
         {/* After (the result) is the base layer, so it is what remains if
             anything above it fails to paint. */}
         <Image
           src={after.src}
           alt={after.alt}
+          {...blurProps(after)}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 40vw"
           className="object-cover"

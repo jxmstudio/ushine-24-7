@@ -3,16 +3,17 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { serviceImages } from "@/data/images";
+import { blurProps, serviceImages } from "@/data/images";
 import type { Service } from "@/data/services";
 
 /**
  * A service, shown as a photograph.
  *
- * This replaces the icon-and-border card that the previous build used. The
- * whole tile is the image, the whole tile is the link, and there is no icon —
- * a picture of a finished kitchen tells someone what "residential cleaning"
- * means faster than a house glyph in a rounded square ever will.
+ * Sharp-cornered and full-bleed within its grid cell — the tiles sit against
+ * each other with hairline gutters, so any radius reads as a rendering error.
+ * The whole tile is the image, the whole tile is the link, and there is no
+ * icon — a picture of a finished kitchen tells someone what "residential
+ * cleaning" means faster than a house glyph in a rounded square ever will.
  */
 export function ServiceTile({
   service,
@@ -32,8 +33,8 @@ export function ServiceTile({
     <Link
       href={`/services/${service.slug}`}
       className={cn(
-        "group focus-visible:ring-lime relative flex min-h-[20rem] flex-col justify-end overflow-hidden rounded-2xl focus-visible:ring-4 focus-visible:outline-none lg:min-h-0",
-        featured && "min-h-[26rem]",
+        "group focus-visible:ring-lime bg-ink relative flex min-h-[22rem] flex-col justify-end overflow-hidden focus-visible:ring-4 focus-visible:outline-none lg:min-h-0",
+        featured && "min-h-[28rem]",
         className,
       )}
     >
@@ -41,6 +42,7 @@ export function ServiceTile({
         <Image
           src={photo.src}
           alt={photo.alt}
+          {...blurProps(photo)}
           fill
           sizes={
             featured
@@ -53,17 +55,18 @@ export function ServiceTile({
 
       <div
         aria-hidden
-        className="from-ink/95 via-ink/45 absolute inset-0 bg-gradient-to-t to-transparent"
+        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,32,31,0.92),rgba(8,32,31,0.35)_48%,transparent_72%)]"
       />
 
-      <div className="relative flex flex-col gap-2 p-6 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-2 sm:p-7">
-        <span className="text-lime text-xs font-bold tracking-[0.2em]">
+      <div className="relative flex flex-col gap-2.5 p-7 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-2 sm:p-8">
+        <span className="text-lime inline-flex items-center gap-2.5 text-xs font-bold tracking-[0.2em]">
+          <span aria-hidden className="bg-lime h-px w-6 opacity-80" />
           {String(index + 1).padStart(2, "0")}
         </span>
 
         <h3
           className={cn(
-            "text-mist font-extrabold tracking-tight",
+            "text-mist font-semibold",
             featured ? "text-3xl sm:text-4xl lg:text-5xl" : "text-2xl",
           )}
         >
@@ -73,7 +76,7 @@ export function ServiceTile({
         <p
           className={cn(
             "text-mist/75 leading-relaxed",
-            featured ? "max-w-md text-base sm:text-lg" : "text-sm",
+            featured ? "max-w-md text-base sm:text-lg" : "max-w-[34ch] text-sm",
           )}
         >
           {featured ? service.summary : service.tagline}

@@ -6,7 +6,7 @@ import { PageHero } from "@/components/page-hero";
 import { Section, SectionHeading } from "@/components/section";
 import { CtaBand } from "@/components/home-sections";
 import { JsonLd } from "@/components/json-ld";
-import { images } from "@/data/images";
+import { blurProps, images } from "@/data/images";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -58,12 +58,12 @@ export default function AboutPage() {
 
       <Section>
         <div className="mx-auto flex max-w-3xl flex-col gap-6">
-          <div className="relative aspect-16/9 overflow-hidden rounded-2xl border">
+          <div className="bg-ink relative aspect-3/2 overflow-hidden">
             <Image
               src={images.trust.src}
               alt={images.trust.alt}
+              {...blurProps(images.trust)}
               fill
-              priority
               sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover"
             />

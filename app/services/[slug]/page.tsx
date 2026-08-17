@@ -12,11 +12,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { PageHero } from "@/components/page-hero";
+import { PhotoBand } from "@/components/photo-band";
 import { Section, SectionHeading } from "@/components/section";
 import { ServiceTile } from "@/components/service-tile";
 import { CtaBand } from "@/components/home-sections";
 import { JsonLd } from "@/components/json-ld";
-import { serviceImages } from "@/data/images";
+import { blurProps, serviceGalleries, serviceImages } from "@/data/images";
 import { getService, services } from "@/data/services";
 import { site } from "@/data/site";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
@@ -52,6 +53,8 @@ export default async function ServicePage({
   if (!service) notFound();
 
   const photo = serviceImages[service.slug];
+  const gallery = serviceGalleries[service.slug] ?? [];
+  const bodyShot = gallery[0] ?? photo;
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
   const breadcrumbs = [
     { name: "Home", href: "/" },
@@ -85,13 +88,13 @@ export default async function ServicePage({
       <Section>
         <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
           <div className="flex flex-col gap-10">
-            {photo ? (
-              <div className="relative aspect-16/9 overflow-hidden rounded-2xl border">
+            {bodyShot ? (
+              <div className="bg-ink relative aspect-3/2 overflow-hidden">
                 <Image
-                  src={photo.src}
-                  alt={photo.alt}
+                  src={bodyShot.src}
+                  alt={bodyShot.alt}
+                  {...blurProps(bodyShot)}
                   fill
-                  priority
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   className="object-cover"
                 />
@@ -201,13 +204,17 @@ export default async function ServicePage({
         </div>
       </Section>
 
+      {/* Full-bleed working shots — proof of work between the copy and the
+          cross-sell, edge to edge like everything photographic on the site. */}
+      <PhotoBand photos={gallery} />
+
       <Section tone="paper">
         <SectionHeading
           eyebrow="Also available"
           title="Other things we clean"
           description="Most clients start with one service and add another once they know how we work."
         />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-0.5 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((item, i) => (
             <ServiceTile key={item.slug} service={item} index={i} />
           ))}

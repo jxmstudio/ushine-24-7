@@ -126,7 +126,8 @@ export function ConceptDayNight({ className, mono }: MarkProps) {
  * logo. This is the mark that agrees with the site, where an oversized lime
  * 24/7 already recurs as a graphic device.
  *
- * Set in Bricolage. For production it would be converted to outlines so the
+ * Set in the site heading face (now Fraunces). For production it would be
+ * converted to outlines so the
  * mark does not depend on a webfont loading — that matters for the favicon and
  * for anything a printer touches.
  */

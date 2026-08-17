@@ -1,3 +1,6 @@
+"use client";
+
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Phone } from "lucide-react";
@@ -5,37 +8,93 @@ import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/container";
 import { AlwaysOnBadge, TwentyFourSevenMark } from "@/components/twenty-four-seven";
-import { images } from "@/data/images";
+import { blurProps, heroVideo, images } from "@/data/images";
 import { site } from "@/data/site";
 
 /**
  * Full-bleed hero.
  *
  * The photograph is the layout: it runs the whole viewport, the header floats
- * over it, and the type sits on the image rather than in a box beside it. The
- * previous build put a headline in one column and a rounded photo card in the
- * other, which is the layout every business template ships with.
+ * over it, and the type sits on the image rather than in a box beside it.
+ *
+ * The photo is the poster and the LCP element; the video mounts client-side
+ * and fades in over it once it can play, so nothing is ever waiting on a 9MB
+ * download to paint. Under prefers-reduced-motion the video is never mounted
+ * at all — the still frame is the reduced experience, not a paused player.
  *
  * The scrim is deep teal rather than black so the bright, sunlit half of the
- * photo survives — the site has to look spotless, and a heavy black wash makes
+ * frame survives — the site has to look spotless, and a heavy black wash makes
  * any interior look grey.
  */
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+
+function subscribeToReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED_MOTION);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
 export function Hero() {
+  const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  const [videoReady, setVideoReady] = React.useState(false);
+
+  // False on the server so the video is in the first HTML; visitors with
+  // reduced motion drop it at hydration and keep the still photograph.
+  const reduced = React.useSyncExternalStore(
+    subscribeToReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false,
+  );
+
+  // The element is in the server HTML, so the browser can fire `canplay`
+  // before React hydrates and attaches the handler below — in which case the
+  // video would sit fully loaded at opacity 0 forever. Catch up here, and give
+  // playback a nudge in case the browser paused the pre-hydration autoplay.
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.readyState >= 3) setVideoReady(true);
+    video.play().catch(() => {
+      // Autoplay refused — the poster photograph simply stays up.
+    });
+  }, [reduced]);
+
   return (
-    <section className="relative isolate flex min-h-[92svh] items-end overflow-hidden">
+    <section className="bg-deep-teal relative isolate flex min-h-[100svh] items-end overflow-hidden">
       <Image
         src={images.hero.src}
         alt={images.hero.alt}
+        {...blurProps(images.hero)}
         fill
         priority
         sizes="100vw"
         className="-z-20 object-cover"
       />
 
+      {!reduced ? (
+        <video
+          ref={videoRef}
+          className={
+            "absolute inset-0 -z-20 h-full w-full object-cover transition-opacity duration-1000 " +
+            (videoReady ? "opacity-100" : "opacity-0")
+          }
+          src={heroVideo.src}
+          poster={heroVideo.poster.src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          tabIndex={-1}
+          onCanPlay={() => setVideoReady(true)}
+        />
+      ) : null}
+
       {/* Three scrims: one weighting the bottom-left where the type sits, one
           lifting the bottom edge, one taking the top so the floating header
           stays legible. Deliberately heavier than it looks like it needs to be
-          — these images are placeholders, and the client's own photos have to
+          — these frames are placeholders, and the client's own footage has to
           drop in behind this type without anyone re-tuning a gradient. */}
       <div
         aria-hidden
@@ -56,7 +115,7 @@ export function Hero() {
         <div className="flex max-w-4xl flex-col items-start gap-7 sm:gap-8">
           <AlwaysOnBadge />
 
-          <h1 className="text-mist text-display font-extrabold">
+          <h1 className="text-mist text-display font-semibold">
             Clean, <span className="text-lime">whenever</span> you need it.
           </h1>
 

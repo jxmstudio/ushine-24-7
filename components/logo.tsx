@@ -46,13 +46,13 @@ export function Logo({
     <span className={cn("inline-flex items-center gap-3", className)}>
       <LogoMark />
       <span className="flex items-baseline gap-2">
-        <span className="font-heading text-2xl font-extrabold tracking-tight">
+        <span className="font-heading text-2xl font-semibold tracking-tight">
           Ushine
         </span>
         {/* The badge uses currentColor for its border so the lockup works on the
             light header and the dark footer without a second variant. */}
         {showBadge ? (
-          <span className="rounded-md border border-current/35 px-1.5 py-1 text-[0.7rem] leading-none font-extrabold tracking-wide">
+          <span className="rounded-md border border-current/35 px-1.5 py-1 text-[0.7rem] leading-none font-semibold tracking-wide">
             24/7
           </span>
         ) : null}

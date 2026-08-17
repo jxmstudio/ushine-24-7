@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
 import { SiteHeader } from "@/components/site-header";
@@ -10,13 +10,15 @@ import { Toaster } from "@/components/ui/sonner";
 import { localBusinessSchema } from "@/lib/schema";
 import { site } from "@/data/site";
 
-// Bricolage is expressive and contemporary, and deliberately nothing like the
-// editorial serif on the Yireh site — the two brands ship together and must not
-// read as one template. Inter carries the body, neutral and fast.
-const heading = Bricolage_Grotesque({
+// Fraunces variable serif — the editorial display face, per the client's ask
+// to give this site the same treatment as the Yireh build. The SOFT, WONK and
+// optical-size axes are loaded so globals.css can tune the voice per size.
+// Inter carries the body, neutral and fast.
+const heading = Fraunces({
   variable: "--font-heading-family",
   subsets: ["latin"],
   display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
 });
 
 const body = Inter({

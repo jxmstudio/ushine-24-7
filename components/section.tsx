@@ -88,7 +88,7 @@ export function SectionHeading({
 
       <h2
         className={cn(
-          "text-display-sm font-extrabold",
+          "text-display-sm font-semibold",
           tone === "dark" ? "text-mist" : "text-foreground",
         )}
       >

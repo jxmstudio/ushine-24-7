@@ -5,15 +5,17 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------------------
-   Ushine 24/7 — "Always On"
+   Ushine 24/7 — "Always On", cut to the Workroom treatment
 
    Bright, fast, high-contrast and reassuring. Cleaning is bought on trust and
    availability, not on craft, so the design job is: look spotless, prove we
    answer the phone.
 
-   Deliberately shares nothing with the Yireh Textiles system — different
-   palette, different display face, different layout logic. Two sites from one
-   studio that look alike read as a template.
+   This revision applies the same editorial system as the Yireh Textiles build
+   at the client's request: Fraunces variable serif for display type, sharp
+   full-bleed photography with hairline gutters, accents drawn as lines rather
+   than fills, and a 120/200px section rhythm. The palette stays Ushine's own —
+   deep teal, aqua and lime — so the two sites share a treatment, not a skin.
    --------------------------------------------------------------------------- */
 
 @theme inline {
@@ -70,10 +72,11 @@
   --color-brand-soft: var(--brand-soft);
   --color-brand-strong: var(--brand-strong);
 
-  /* Section rhythm. The rejected build ran 48px of vertical padding, which is
+  /* Section rhythm — 120px mobile / 200px desktop, the Workroom "air, never
+     less" rule. The rejected build ran 48px of vertical padding, which is
      the single fastest route back to looking like an office template. */
-  --spacing-section: 6rem;
-  --spacing-section-lg: 10rem;
+  --spacing-section: 7.5rem;
+  --spacing-section-lg: 12.5rem;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -132,7 +135,9 @@
   --chart-3: var(--lime);
   --chart-4: var(--aqua-ink);
   --chart-5: #7fd8cd;
-  --radius: 0.875rem;
+  /* 4px base — deliberately near-sharp. Photographs render as clean rectangles;
+     the small radius survives only on form fields and buttons. */
+  --radius: 0.25rem;
   --sidebar: #ffffff;
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--deep-teal);
@@ -188,6 +193,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
   }
   html {
     @apply font-sans;
@@ -198,10 +205,18 @@
   :has(:target) {
     scroll-behavior: smooth;
   }
+  /* Fraunces carries every heading. The SOFT and WONK axes are what stop the
+     serif reading as a law firm — warmth and a little character, tuned once
+     here so no component re-guesses it. */
   h1,
   h2,
-  h3 {
-    @apply font-heading tracking-tight;
+  h3,
+  h4 {
+    @apply font-heading;
+    font-variation-settings:
+      "SOFT" 40,
+      "WONK" 1;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
   p {
@@ -210,17 +225,26 @@
 }
 
 @layer utilities {
-  /* Display scale. Bricolage carries the "modern" half of the brief, so the
-     headline sizes are set once here rather than re-guessed per section. */
+  /* Display scale. Fraunces' optical size axis is stepped down with the type —
+     display sizes get the high-contrast cut, sub-heads a sturdier one. Set
+     once here rather than re-guessed per section. */
   .text-display {
-    font-size: clamp(2.5rem, 7.5vw, 5.5rem);
-    line-height: 0.98;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.75rem, 7.2vw, 5.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    font-variation-settings:
+      "SOFT" 40,
+      "WONK" 1,
+      "opsz" 100;
   }
   .text-display-sm {
-    font-size: clamp(1.9rem, 4.5vw, 3.25rem);
-    line-height: 1.04;
-    letter-spacing: -0.025em;
+    font-size: clamp(2rem, 4.4vw, 3.5rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    font-variation-settings:
+      "SOFT" 40,
+      "WONK" 1,
+      "opsz" 80;
   }
 
   /* The lime "24/7" device is drawn as an outline at large sizes so it reads

@@ -53,7 +53,7 @@ export default function ServicesPage() {
           title="Pick the service you need"
           description="Not sure which one fits? Call us and describe the place — we will tell you what it needs and what it costs."
         />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-0.5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <ServiceTile key={service.slug} service={service} index={i} />
           ))}

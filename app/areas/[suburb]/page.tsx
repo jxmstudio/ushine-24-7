@@ -145,7 +145,7 @@ export default async function SuburbPage({
           eyebrow={`In ${suburb.name}`}
           title="What we can clean for you"
         />
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-0.5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <ServiceTile key={service.slug} service={service} index={i} />
           ))}
