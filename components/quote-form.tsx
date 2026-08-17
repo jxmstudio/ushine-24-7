@@ -24,7 +24,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { submitEnquiry } from "@/actions/submit-enquiry";
 import {
   enquirySchema,
   frequencyOptions,
@@ -32,6 +31,11 @@ import {
 } from "@/lib/validations";
 import { serviceOptions } from "@/data/services";
 import { site } from "@/data/site";
+
+// JXM Forms — spam filtering and email delivery happen on their side.
+// The key is public by design; it only identifies the site.
+const JXM_ENDPOINT = "https://jxm-forms.vercel.app/api/submit/ushine";
+const JXM_API_KEY = "AtLcJPTGYjh8zPNAhrF5urdnEfIgk-ha";
 
 export function QuoteForm() {
   const router = useRouter();
@@ -65,30 +69,55 @@ export function QuoteForm() {
     register,
     handleSubmit,
     control,
-    setError,
     formState: { errors },
   } = form;
 
   function onSubmit(values: EnquiryInput) {
     startTransition(async () => {
-      const result = await submitEnquiry({
-        ...values,
-        elapsed: mountedAt.current ? Date.now() - mountedAt.current : undefined,
-      });
-
-      if (result.ok) {
+      // Honeypot filled, or submitted faster than a human could type: skip the
+      // network call and let the bot believe it succeeded.
+      const elapsed = mountedAt.current
+        ? Date.now() - mountedAt.current
+        : undefined;
+      if (values.company || (elapsed !== undefined && elapsed < 2500)) {
         router.push("/thank-you");
         return;
       }
 
-      if (result.fieldErrors) {
-        for (const [field, messages] of Object.entries(result.fieldErrors)) {
-          if (messages?.[0]) {
-            setError(field as keyof EnquiryInput, { message: messages[0] });
-          }
+      try {
+        const response = await fetch(JXM_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-api-key": JXM_API_KEY,
+          },
+          body: JSON.stringify({
+            name: values.name,
+            phone: values.phone,
+            email: values.email || "",
+            suburb: values.suburb,
+            service:
+              serviceOptions.find((o) => o.value === values.service)?.label ??
+              values.service,
+            frequency:
+              frequencyOptions.find((o) => o.value === values.frequency)
+                ?.label ?? values.frequency,
+            message: values.message || "",
+            _gotcha: values.company || "",
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`JXM Forms responded ${response.status}`);
         }
+
+        router.push("/thank-you");
+      } catch (error) {
+        console.error("[enquiry] delivery failed", error);
+        toast.error(
+          "Something went wrong sending your enquiry. Please call us — we answer 24/7.",
+        );
       }
-      toast.error(result.error);
     });
   }
 
