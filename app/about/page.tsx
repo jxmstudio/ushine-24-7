@@ -9,13 +9,15 @@ import { JsonLd } from "@/components/json-ld";
 import { blurProps, images } from "@/data/images";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Ushine 24/7",
+  absoluteTitle: true,
   description:
-    "A Western Sydney cleaning business built around one idea: be available when people actually need a cleaner. Residential, commercial, Airbnb and end-of-lease cleaning, 24 hours a day.",
-  alternates: { canonical: "/about" },
-};
+    "A Western Sydney cleaning business built around one idea: be available when people actually need a cleaner — 24 hours a day, seven days a week.",
+  path: "/about",
+});
 
 const values = [
   {

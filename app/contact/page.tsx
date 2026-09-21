@@ -12,12 +12,14 @@ import { JsonLd } from "@/components/json-ld";
 import { site } from "@/data/site";
 import { suburbs } from "@/data/suburbs";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Ushine 24/7",
+  absoluteTitle: true,
   description: `Call ${site.phone} any time — we answer 24 hours a day, seven days a week. Or send an enquiry and we will come back to you with a fixed price.`,
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 const channels = [
   {

@@ -21,6 +21,7 @@ import { blurProps, serviceGalleries, serviceImages } from "@/data/images";
 import { getService, services } from "@/data/services";
 import { site } from "@/data/site";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -33,16 +34,11 @@ export async function generateMetadata({
   const service = getService(slug);
   if (!service) return {};
 
-  return {
+  return pageMetadata({
     title: `${service.title} Sydney`,
     description: service.summary,
-    alternates: { canonical: `/services/${service.slug}` },
-    openGraph: {
-      title: `${service.title} in Sydney | ${site.name}`,
-      description: service.summary,
-      url: `${site.url}/services/${service.slug}`,
-    },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({

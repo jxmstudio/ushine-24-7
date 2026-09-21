@@ -29,7 +29,6 @@ export default function OpengraphImage() {
               needs no tile of its own. Mist for the large sparkle rather than
               aqua: this mark sits next to the wordmark, and the two should read
               as one lockup rather than two competing greens. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             width={72}
             height={72}

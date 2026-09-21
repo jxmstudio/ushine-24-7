@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "favicon": "node --experimental-strip-types scripts/generate-favicon.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.7.1",

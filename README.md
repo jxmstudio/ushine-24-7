@@ -7,7 +7,12 @@ Router) · Tailwind v4 · shadcn/ui · TypeScript.
 npm run dev     # dev server
 npm run build   # production build (all pages prerender statically)
 npm run lint
+npm run favicon # rebuild app/favicon.ico from lib/brand-mark.ts
 ```
+
+If the checkout folder has a `:` in its name (e.g. `Ushine 24:7`), `npm run`
+cannot find `next` or `eslint` — the colon splits `PATH`. Either rename the
+folder or call the binary directly: `node node_modules/next/dist/bin/next dev`.
 
 ## Where things live
 
@@ -22,6 +27,7 @@ npm run lint
 | `components/logo.tsx` | Live logo. Alternatives in `components/logo-concepts.tsx`. |
 | `components/quote-form.tsx` | Enquiry form — client-side validation + honeypot, posts to JXM Forms. |
 | `lib/schema.ts` | JSON-LD builders (LocalBusiness, Service, FAQPage, Breadcrumb). |
+| `lib/metadata.ts` | `pageMetadata()` — title, description, canonical, Open Graph and Twitter for a page. Use it for every new page so link previews carry the right URL and image. |
 
 Copy edits should not require touching JSX — if you find yourself editing a
 component to change wording, the string probably belongs in `data/`.
@@ -54,7 +60,9 @@ component to change wording, the string probably belongs in `data/`.
    add the ABN to `data/site.ts` when supplied and it appears in the footer.
 5. **Review `/privacy` and `/terms`** — sensible drafts, not legal advice.
 6. **Pick a logo** at `/brand`, then update `components/logo.tsx`,
-   `app/icon.tsx` and `app/opengraph-image.tsx`. Delete `app/brand` afterwards.
+   `app/icon.tsx`, `app/apple-icon.tsx` and `app/opengraph-image.tsx`, and run
+   `npm run favicon` to rebuild `app/favicon.ico` from the same mark. Delete
+   `app/brand` afterwards.
 7. **Swap the photography.** Every image is currently free stock from Unsplash,
    listed in `data/images.ts` and served from their CDN via `next/image`
    (`images.remotePatterns` in `next.config.ts`). They are there to show the

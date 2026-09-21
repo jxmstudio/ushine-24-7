@@ -14,6 +14,7 @@ import { services } from "@/data/services";
 import { generalFaqs } from "@/data/faqs";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return suburbs.map((suburb) => ({ suburb: suburb.slug }));
@@ -29,16 +30,11 @@ export async function generateMetadata({
   const title = `Cleaners in ${suburb.name} — Available 24/7`;
   const description = `Residential, end of lease, Airbnb and commercial cleaning in ${suburb.name}, ${suburb.region}. Fixed quotes, no lock-in contracts, available 24 hours a day.`;
 
-  return {
+  return pageMetadata({
     title,
     description,
-    alternates: { canonical: `/areas/${suburb.slug}` },
-    openGraph: {
-      title: `${title} | ${site.name}`,
-      description,
-      url: `${site.url}/areas/${suburb.slug}`,
-    },
-  };
+    path: `/areas/${suburb.slug}`,
+  });
 }
 
 export default async function SuburbPage({

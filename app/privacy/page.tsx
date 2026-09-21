@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { Section } from "@/components/section";
 import { site } from "@/data/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description: `How ${site.name} collects, uses and protects the personal information you give us.`,
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 /**
  * DRAFT — plain-language policy covering what this site actually does.

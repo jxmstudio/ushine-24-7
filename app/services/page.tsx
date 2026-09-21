@@ -12,13 +12,14 @@ import { services } from "@/data/services";
 import { generalFaqs } from "@/data/faqs";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Cleaning Services in Sydney",
   description:
     "Residential, weekly contract, end of lease, Airbnb and commercial cleaning across Sydney. Available 24/7, fixed quotes, no lock-in contracts.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

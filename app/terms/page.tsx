@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/page-hero";
 import { Section } from "@/components/section";
 import { site } from "@/data/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
-  description: `The terms that apply when you book cleaning work with ${site.name}.`,
-  alternates: { canonical: "/terms" },
-};
+  description: `The terms that apply when you book cleaning work with ${site.name} — quotes, payment, cancellations and our re-clean guarantee.`,
+  path: "/terms",
+});
 
 /**
  * DRAFT — sensible defaults for a cleaning business. The client must confirm

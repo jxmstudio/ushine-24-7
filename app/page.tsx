@@ -18,12 +18,14 @@ import { JsonLd } from "@/components/json-ld";
 import { generalFaqs } from "@/data/faqs";
 import { faqSchema } from "@/lib/schema";
 import { site } from "@/data/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: `${site.name} — Cleaning Services Sydney, Available 24/7`,
+  absoluteTitle: true,
   description: site.description,
-  alternates: { canonical: "/" },
-};
+  path: "/",
+});
 
 /**
  * Homepage section order follows the "Always On" brief: prove availability

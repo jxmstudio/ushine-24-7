@@ -10,13 +10,14 @@ import { JsonLd } from "@/components/json-ld";
 import { suburbsByRegion } from "@/data/suburbs";
 import { site } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Areas We Service — Cleaners Across Sydney",
   description:
-    "Ushine 24/7 is based in Western Sydney and cleans across the whole Sydney metro area — Penrith, Blacktown, Parramatta, Liverpool, the Hills, the Inner West and beyond.",
-  alternates: { canonical: "/areas" },
-};
+    "Based in Western Sydney, cleaning across the whole Sydney metro area — Penrith, Blacktown, Parramatta, Liverpool, the Hills, the Inner West and beyond.",
+  path: "/areas",
+});
 
 export default function AreasPage() {
   const breadcrumbs = [

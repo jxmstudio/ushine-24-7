@@ -26,6 +26,7 @@ export function gleamMark({
   primary,
   accent = "#C6F24E",
   tile,
+  tileRadius = 12,
 }: {
   size: number;
   /** Fill for the large sparkle. */
@@ -34,6 +35,8 @@ export function gleamMark({
   accent?: string;
   /** Rounded background tile, or omit for the bare mark. */
   tile?: string;
+  /** Corner radius of the tile in viewBox units (of 48). 0 for full-bleed. */
+  tileRadius?: number;
 }) {
   // Tiled, the pair is inset so it does not crowd the corner radius; bare, it
   // uses the same composition as the header logo.
@@ -43,7 +46,7 @@ export function gleamMark({
 
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="${size}" height="${size}">`,
-    tile ? `<rect width="48" height="48" rx="12" fill="${tile}"/>` : "",
+    tile ? `<rect width="48" height="48" rx="${tileRadius}" fill="${tile}"/>` : "",
     `<path d="${SPARKLE}" fill="${primary}" transform="${place(g.big[0], g.big[1], g.big[2])}"/>`,
     `<path d="${SPARKLE}" fill="${accent}" transform="${place(g.small[0], g.small[1], g.small[2])}"/>`,
     `</svg>`,

@@ -11,7 +11,8 @@ export function localBusinessSchema() {
     legalName: site.legalName,
     description: site.description,
     url: site.url,
-    telephone: site.phone,
+    // International format — what Google asks for on LocalBusiness.
+    telephone: site.phoneHref.replace("tel:", ""),
     email: site.email,
     image: `${site.url}/opengraph-image`,
     priceRange: "$$",

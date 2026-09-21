@@ -10,13 +10,14 @@ import { QuoteForm } from "@/components/quote-form";
 import { JsonLd } from "@/components/json-ld";
 import { site, trustPoints } from "@/data/site";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Get a Free Cleaning Quote",
   description:
     "Tell us your suburb and what needs cleaning and we will come back with a fixed price. No obligation. We answer the phone 24 hours a day.",
-  alternates: { canonical: "/quote" },
-};
+  path: "/quote",
+});
 
 export default function QuotePage() {
   const breadcrumbs = [
