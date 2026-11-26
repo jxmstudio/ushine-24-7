@@ -42,7 +42,7 @@ Deviations from the plan below, all deliberate:
 | References | None given — free design hand |
 
 ### Open items (assumed, flag for client)
-1. **Contact details** — questionnaire says "same as above", which is the Yireh phone/email (`0410 288 829`, `info@yirehstitchtech.com`). Assumption: reuse the phone number, but register a Ushine domain + `info@ushine247.com.au`. Needs confirmation before launch.
+1. **Contact details** — questionnaire says "same as above", which is the Yireh phone/email (`0410 288 829`, `info@yirehstitchtech.com`). Reuse the phone number; the Ushine mailbox is `hello@ushine247.com.au` (confirmed).
 2. **Pricing** — assumption: quote-only, no rates published ("From $X" band optional later).
 3. **Trust signals** — ABN, public liability insurance, police-checked cleaners, bond-back guarantee. All are conversion-critical for cleaning sites; ask client which are true and only publish those.
 4. **Photos** — licensed stock (Unsplash/Pexels) with a clear swap path once client's real photos arrive.

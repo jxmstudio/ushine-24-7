@@ -18,7 +18,7 @@ export const site = {
   phone: "0410 288 829", // TODO confirm number for Ushine
   phoneHref: "tel:+61410288829",
   whatsappHref: "https://wa.me/61410288829",
-  email: "info@ushine247.com.au", // TODO create mailbox
+  email: "hello@ushine247.com.au",
   baseSuburb: "Penrith",
   baseRegion: "Western Sydney",
   serviceArea: "Sydney and Greater Western Sydney",

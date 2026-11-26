@@ -48,9 +48,9 @@ component to change wording, the string probably belongs in `data/`.
 
 ## Before launch
 
-1. **Register the domain and mailbox.** `data/site.ts` currently assumes
-   `ushine247.com.au` and `info@ushine247.com.au`. The questionnaire said "same
-   as above", which was the Yireh address — confirm with the client.
+1. **Register the domain and mailbox.** `data/site.ts` uses
+   `ushine247.com.au` and `hello@ushine247.com.au` (confirmed with the client).
+   Make sure the mailbox exists before launch.
 2. **Confirm the phone number** for Ushine (currently the Yireh number).
 3. **Submit a real test enquiry** in production and confirm it lands in the
    JXM Forms dashboard (the form posts to
